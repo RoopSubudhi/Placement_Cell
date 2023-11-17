@@ -1,21 +1,7 @@
-const mongoose = require('mongoose');
-const interview = new mongoose.Schema({
-    companyName :{
-        type : String,
-        required : true
-    },
-    date :{
-        type : Date,
-        default : Date.now()
-    },
-    students :[{
-        type : mongoose.Schema.Types.ObjectId,
-        ref :'Student'
-    }],
-    result:[{
-        type : mongoose.Schema.Types.ObjectId,
-        ref :'Result'
-    }]
-},{timestamps : true});
-const Interview = mongoose.model('Interview' , interview);
-module.exports = Interview;
+const express = require('express');
+const router = express.Router();
+const interviewPage = require('../controller/interview');
+router.get('/interview_list' ,interviewPage.interviewPage);
+router.get('/:id' , interviewPage.interviewForm);
+router.post('/interview_allocation' , interviewPage.interviewAllocation);
+module.exports = router;
